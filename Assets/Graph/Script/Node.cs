@@ -17,11 +17,17 @@ namespace Graph
         private bool isVisited = false;
         public bool IsVisited => isVisited;
 
-        public void Visit(Node prevNode)
+        public void Visit(Node prevNode = null)
         {
+            if (isVisited)
+            {
+                return;
+            }
+
             this.prevNode = this.prevNode != null ? this.prevNode : prevNode;
             isVisited = true;
             spriteRenderer.color = Color.yellow;
+            Debug.Log($"[NODE] Visit [{id}]");
         }
 
         public Node GetNotVisitedLinkedNode()
