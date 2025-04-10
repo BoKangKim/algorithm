@@ -10,9 +10,11 @@ namespace Algorithm.DFS
         [SerializeField] private Node rootNode;
         private Node curNode = null;
         private Node nextNode = null;
+        private WaitForSeconds wait = null;
 
         private void Start()
         {
+            wait = new WaitForSeconds(0.5f);
             StartCoroutine(StartDFS());
         }
 
@@ -30,14 +32,14 @@ namespace Algorithm.DFS
                     curNode = rootNode;
                     curNode.Visit(null);
                     nextNode = curNode.GetNotVisitedLinkedNode();
-                    yield return new WaitForSeconds(0.5f);
+                    yield return wait;
                     continue;
                 }
 
                 nextNode.Visit(curNode);
                 curNode = nextNode;
                 nextNode = curNode.GetNotVisitedLinkedNode();
-                yield return new WaitForSeconds(0.5f);
+                yield return wait;
             }
 
             Debug.Log($"[DFS] END");
